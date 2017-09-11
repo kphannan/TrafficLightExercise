@@ -42,4 +42,11 @@ public class TrafficLightTest
     {
         Assert.assertEquals( 2, TrafficLight.YELLOW.getDuration() );
     }
+
+
+    @Test
+    public void verifyOnlyThreeStates()
+    {
+        Assert.assertEquals( 3, TrafficLight.values().length );
+    }
 }

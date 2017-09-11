@@ -12,8 +12,9 @@ public enum TrafficLight
         }
     ,YELLOW(2)
         {
-        public TrafficLight next() { return RED; }
-        };
+            public TrafficLight next() { return RED; }
+        }
+        ;
 
     private TrafficLight( int onDuration )
     {
@@ -21,7 +22,20 @@ public enum TrafficLight
     }
 
     public int      getDuration()             { return onTime; }
+//    public TrafficLight next()
+//    {
+//        switch (this)
+//        {
+//            case RED:    return GREEN;
+//            case GREEN:  return YELLOW;
+//            case YELLOW: return RED;
+//        }
+//
+//        return RED;
+//    }
     public abstract TrafficLight next();
 
     private int onTime;
 }
+
+
