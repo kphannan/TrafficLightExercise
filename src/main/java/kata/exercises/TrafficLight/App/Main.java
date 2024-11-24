@@ -1,13 +1,9 @@
-package kata.exercises.TrafficLight.App;
+package kata.exercises.trafficlight.app;
 
-import kata.exercises.TrafficLight.TrafficLight;
+import static kata.exercises.trafficlight.TrafficLight.RED;
 
 import java.util.concurrent.TimeUnit;
-
-import static kata.exercises.TrafficLight.TrafficLight.RED;
-
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import java.util.logging.LogManager;
 
 
 public class Main
