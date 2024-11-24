@@ -8,11 +8,11 @@ import kata.exercises.trafficlight.TrafficLight;
 
 
 
-public final class Main
+public final class App
 {
-    // private static final Logger       log      = Logger.getLogger( Main.class );
+    // private static final Logger       log      = Logger.getLogger( App.class );
 
-    private Main()
+    private App()
     {
         // Nothing to initialize
     }
