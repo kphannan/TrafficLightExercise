@@ -3,11 +3,11 @@ version '1.0-SNAPSHOT'
 
 apply plugin: 'java'
 
-sourceCompatibility = 1.8
+// sourceCompatibility = 1.8
 
 
 dependencies {
-    testImplementation( 'junit:junit4.12' )
+    testImplementation( 'junit:junit:4.12' )
 
     // --- Log4j2 ----
     // implementation 'org.apache.logging.log4j:log4j-core:2.24.2'
