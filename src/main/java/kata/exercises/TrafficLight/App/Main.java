@@ -3,15 +3,14 @@ package kata.exercises.trafficlight.app;
 import static kata.exercises.trafficlight.TrafficLight.RED;
 
 import java.util.concurrent.TimeUnit;
-import java.util.logging.Logger;
 
 import kata.exercises.trafficlight.TrafficLight;
 
 
+
 public final class Main
 {
-    private static Logger             log      = Logger.getLogger( "kata.exercices.trafficlignt.app.Main" );
-
+    // private static final Logger       log      = Logger.getLogger( Main.class );
 
     private Main()
     {
