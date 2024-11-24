@@ -9,6 +9,9 @@ import org.junit.jupiter.api.Test;
 
 
 
+/**
+ * Unit tests.
+ */
 public class TrafficLightTest
 {
     @Test

@@ -1,26 +1,46 @@
 package kata.exercises.trafficlight;
 
+
+/**
+ * Possible states of a traffic light.
+ */
 public enum TrafficLight
 {
     RED( 8 )
+    {
+        @Override
+        public TrafficLight next()
         {
-            public TrafficLight next() { return GREEN; }
+            return GREEN;
         }
-    ,GREEN(6)
+    }
+    , GREEN( 6 )
+    {
+        @Override
+        public TrafficLight next()
         {
-            public TrafficLight next() { return YELLOW; }
+            return YELLOW;
         }
-    ,YELLOW(2)
+    }
+    , YELLOW( 2 )
+    {
+        @Override
+        public TrafficLight next()
         {
-        public TrafficLight next() { return RED; }
-        };
+            return RED;
+        }
+    };
 
-    private TrafficLight( int onDuration )
+    TrafficLight( int onDuration )
     {
         onTime = onDuration;
     }
 
-    public int      getDuration()             { return onTime; }
+    public int      getDuration()
+    {
+        return onTime;
+    }
+
     public abstract TrafficLight next();
 
     private int onTime;

@@ -8,6 +8,9 @@ import kata.exercises.trafficlight.TrafficLight;
 
 
 
+/**
+ * Traffic light application.
+ */
 public final class App
 {
     // private static final Logger       log      = Logger.getLogger( App.class );
@@ -22,6 +25,12 @@ public final class App
         return true;
     }
 
+
+    /**
+     * Main entry point.
+     *
+     * @param args commandline arguments.
+     */
     public static void main( String[] args )
     {
         try
