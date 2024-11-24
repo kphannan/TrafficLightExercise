@@ -1,4 +1,4 @@
-package kata.exercises.TrafficLight;
+package kata.exercises.trafficlight;
 
 public enum TrafficLight
 {

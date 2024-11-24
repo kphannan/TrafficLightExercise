@@ -1,28 +1,57 @@
+
+buildscript {
+    ext {
+        basePackage                = 'kata.exercises.trafficlight'
+
+        // ===== Quality checks =====
+    }
+}
+
+
+plugins {
+    id 'java'
+    id 'application'
+}
+
+
 group 'kata.exercises.enum'
 version '1.0-SNAPSHOT'
 
-apply plugin: 'java'
 
-sourceCompatibility = 1.8
 
-repositories {
-    mavenCentral()
-}
 
 dependencies {
-    testCompile group: 'junit', name: 'junit', version: '4.12'
-
     // --- Log4j2 ----
-    // https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-core
-    compile group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.8.2'
-
-    // https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-api
-    compile group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.8.2'
+    implementation 'org.apache.logging.log4j:log4j-core:2.24.2'
 
     // ------ YAML support for log4j2 ------
     // https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind
-    compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.9.0'
+    implementation( 'com.fasterxml.jackson.core:jackson-databind:2.9.0' )
 
     // https://mvnrepository.com/artifact/com.fasterxml.jackson.dataformat/jackson-dataformat-yaml
-    compile group: 'com.fasterxml.jackson.dataformat', name: 'jackson-dataformat-yaml', version: '2.9.0'
+    implementation( 'com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.9.0' )
+
+    // testImplementation( 'junit:junit:4.12' )
+    testImplementation libs.junit.jupiter
+
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+
+
+
+// Apply a specific Java toolchain to ease working on different environments.
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(23)
+    }
+}
+
+application {
+    // Define the main class for the application.
+    mainClass = "${basePackage}.app.Main"
+}
+
+tasks.named('test') {
+    // Use JUnit Platform for unit tests.
+    useJUnitPlatform()
 }

@@ -1,17 +1,22 @@
-package kata.exercises.TrafficLight.App;
+package kata.exercises.trafficlight.app;
 
-import kata.exercises.TrafficLight.TrafficLight;
+import static kata.exercises.trafficlight.TrafficLight.RED;
 
 import java.util.concurrent.TimeUnit;
 
-import static kata.exercises.TrafficLight.TrafficLight.RED;
-
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import kata.exercises.trafficlight.TrafficLight;
 
 
-public class Main
+
+public final class Main
 {
+    // private static final Logger       log      = Logger.getLogger( Main.class );
+
+    private Main()
+    {
+        // Nothing to initialize
+    }
+
     public static boolean isRunning()
     {
         return true;
@@ -24,7 +29,7 @@ public class Main
             TrafficLight currentSignal = RED;
             while ( isRunning() )
             {
-                log.info( currentSignal );
+                // log.info( currentSignal );
                 TimeUnit.SECONDS.sleep( currentSignal.getDuration() );
                 currentSignal = currentSignal.next();
             }
@@ -34,7 +39,4 @@ public class Main
             e.printStackTrace();
         }
     }
-
-    private static Logger             log      = LogManager.getLogger();
-
 }
