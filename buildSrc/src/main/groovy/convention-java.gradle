@@ -11,7 +11,7 @@ plugins {
     id 'checkstyle'
 
     // --- PMD - Common Coding flaws
-    // id 'pmd'
+    id 'pmd'
 
     // --- Coverage
     id 'jacoco'
@@ -84,15 +84,16 @@ checkstyleTest {
 
 // ----- Static Analysis
 // --- PMD
-// pmd {
+pmd {
 //     //toolVersion = "${pmdVersion}"       // 6.32.0
-//     ruleSetFiles = files("${rootDir}/config/pmd/pmd.xml")
+    toolVersion = "7.7.0"
+    ruleSetFiles = files("${rootDir}/config/pmd/pmd.xml")
 //     // ruleSets = []
-//     threads = 8
+    threads = 8
 
-//     consoleOutput  = true
-//     ignoreFailures = true       // Don't interrupt the build
-// }
+    // consoleOutput  = true
+    ignoreFailures = true       // Don't interrupt the build
+}
 
 
 
@@ -177,8 +178,8 @@ def getVersion() {
 
 // Configure how a version number is computed
 versioning {
-    releases = ['release', 'master']
-    // releaseMode = 'tag'	// [tag(default) or snapshot how to compute version on release-branches
+    releases = [ 'release','rc' ]
+    releaseMode = 'tag'	// [tag(default) or snapshot how to compute version on release-branches
 
     displayMode = 'snapshot'	// [full(default), snapshot or base] how to compute version on non-release-branches
 }
