@@ -3,11 +3,194 @@
 
 plugins {
     id 'java'
+
+    // ===== Quality Assurance =====
+    // --- Static Analysis
+
+    // --- Style
+    id 'checkstyle'
+
+    // --- PMD - Common Coding flaws
+    // id 'pmd'
+
+    // --- Coverage
+    id 'jacoco'
+
+    // --- Mutation testing
+    id 'info.solidsoft.pitest'
+
+    // --- Artifact Versioning
+    id 'net.nemerosa.versioning'
+
+    // --- Artifact Publishing
+    id 'maven-publish'
+    // SECTION_PLUGIN
+
 }
+
+
+// --- Artifact Publishing
+// apply from: './buildscripts/publishing.gradle'
+// SECTION_APPLY
 
 
 dependencies {
 
-    testImplementation libs.junit.jupiter
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.9.2'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+
 }
 
+
+
+// Apply a specific Java toolchain to ease working on different environments.
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(23)
+    }
+}
+
+
+
+// ----- Runtime Testing -----
+// --- Unit testing
+tasks.withType( Test ) {
+    useJUnitPlatform()
+
+    outputs.upToDateWhen { false }
+}
+
+
+// ----- Static Analysis
+// --- Checkstyle
+checkstyle {
+    ignoreFailures = false
+    showViolations = false
+    toolVersion = "${checkstyleVersion}"
+    // checkstyle.xml copy from:
+    // https://raw.githubusercontent.com/checkstyle/checkstyle/checkstyle-8.6/src/main/resources/google_checks.xml
+    // the version should be as same as plugin version
+    configFile = file("${rootDir}/config/checkstyle/checkstyle.xml")
+}
+
+checkstyleMain {
+    source = 'src/main/java'
+}
+
+checkstyleTest {
+    source = 'src/test/java'
+}
+
+// ----- Static Analysis
+// --- PMD
+// pmd {
+//     //toolVersion = "${pmdVersion}"       // 6.32.0
+//     ruleSetFiles = files("${rootDir}/config/pmd/pmd.xml")
+//     // ruleSets = []
+//     threads = 8
+
+//     consoleOutput  = true
+//     ignoreFailures = true       // Don't interrupt the build
+// }
+
+
+
+
+// --- Code coverage
+jacocoTestCoverageVerification {
+    violationRules {
+        rule {
+            limit {
+                minimum = 0.1
+            }
+        }
+
+        rule {
+            limit {
+                counter = 'LINE'
+                value   = 'COVEREDRATIO'
+                minimum = 0.1
+            }
+        }
+
+        rule {
+            enabled = false
+            element = 'CLASS'
+            includes = ['org.gradle.*']
+
+            limit {
+                counter = 'LINE'
+                value = 'TOTALCOUNT'
+                maximum = 0.1
+            }
+        }
+    }
+}
+
+jacocoTestReport {
+    dependsOn test // tests are required to run before generating the report
+
+    reports {
+        xml.required = true
+    }
+
+    afterEvaluate {
+        classDirectories.setFrom(files(classDirectories.files.collect {
+            fileTree(dir: it, exclude: [
+                      "**/Application.class"  // Do not include the application class in coverage stats
+                    , "**/App.class"          // Do not include the application class in coverage stats
+            ])
+        }))
+    }
+}
+
+
+// --- Mutation testing
+pitest {
+    pitestVersion = "${pitVersion}" //not needed when a default PIT version should be used
+    verbose = true
+    junit5PluginVersion = '1.2.1'
+    // testSourceSets = [sourceSets.test]
+    // mainSourceSets = [sourceSets.main]
+    targetClasses = ["${basePackage}.*"]
+    excludedTestClasses = [ "**/*App.*" ]
+    threads = 16
+    timestampedReports = false
+    withHistory = false
+    outputFormats = ['XML', 'HTML']
+    reportDir = new File("${project.buildDir}/test-results/mutation")
+    // mutators = ['DEFAULTS', 'STRONGER', 'ALL' ]
+    mutators = ['ALL' ]
+}
+
+
+
+// ===== Versioning =====
+// --- Create version from tags or branch names in git
+// def getVersion() {
+//     return 'versioning.info.full-0001'
+// }
+def getVersion() {
+    return versioning.info.full
+}
+
+versioning {
+    releases = ['release', 'master']
+    releaseMode = 'tag'	// (tag or snapshot) how to compute version on release-branches
+    displayMode = 'snapshot'	// (full, snapshot or base) how to compute version on non-release-branches
+}
+
+
+jar {
+    manifest {
+        attributes(
+            'Built-By'       : System.properties['user.name'],
+            'Build-Timestamp': new java.text.SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ").format(new Date()),
+            'Build-Revision' : versioning.info.commit,
+            'Created-By'     : "Gradle ${gradle.gradleVersion}",
+            'Build-Jdk'      : "Version: ${System.properties['java.version']} (Vendor: ${System.properties['java.vendor']} Version: ${System.properties['java.vm.version']})",
+            'Build-OS'       : "OS: ${System.properties['os.name']} Arch: ${System.properties['os.arch']} Version: ${System.properties['os.version']}",
+            'Implementation-Version' : getVersion()
+        )
+    }
+}

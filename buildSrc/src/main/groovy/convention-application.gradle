@@ -1,0 +1,14 @@
+
+
+plugins {
+    id 'application'
+}
+
+
+
+
+application {
+    // Define the main class for the application.
+    mainClass = "${basePackage}.app.Main"
+}
+

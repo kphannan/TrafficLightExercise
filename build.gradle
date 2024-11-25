@@ -1,0 +1,40 @@
+
+
+buildscript {
+    ext {
+        basePackage                = 'kata.exercises.trafficlight'
+
+        // ===== Quality checks =====
+
+        // --- Coding practices (static analysis) ---
+        // --- Coding style
+        checkstyleVersion          = '10.20.0'
+
+        // --- Common Coding flaws
+        pmdVersion                 = '7.7.0'
+
+        // --- Testing ---
+
+        // --- Mutation Testing
+        pitPluginVersion           = '1.15.0'
+        pitVersion                 = '1.17.1'
+
+        // ===== Configuration Management =====
+
+        // --- Artifact Versioning
+        nemerosaVersion            = '3.1.0'
+
+        // --- Artifact Publishing
+        //publishingVersion          = '3.1.0'
+        //  SECTION_VERSIONTAGS
+    }
+}
+
+
+plugins {
+    // --- Mutation testing
+    id 'info.solidsoft.pitest' version "${pitPluginVersion}"
+
+    // --- Artifact Versioning
+    id 'net.nemerosa.versioning' version "${nemerosaVersion}"
+}
