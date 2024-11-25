@@ -6,11 +6,12 @@ pitest {
     // testSourceSets = [sourceSets.test]
     // mainSourceSets = [sourceSets.main]
     targetClasses = ["${basePackage}.*"]
+    excludedTestClasses = [ "**/*App.*" ]
     threads = 16
     timestampedReports = false
     withHistory = false
     outputFormats = ['XML', 'HTML']
     reportDir = new File("${project.buildDir}/test-results/mutation")
     // mutators = ['DEFAULTS', 'STRONGER', 'ALL' ]
-    mutators = ['DEFAULTS' ]
+    mutators = ['ALL' ]
 }
