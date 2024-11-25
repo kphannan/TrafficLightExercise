@@ -31,17 +31,33 @@ public enum TrafficLight
         }
     };
 
-    TrafficLight( int onDuration )
+    private final int onTime;
+
+
+    /**
+     * Create a traffic light Enumeratoin.
+     *
+     * @param onDuration how long a state should remain 'on'.
+     */
+    TrafficLight( final int onDuration )
     {
         onTime = onDuration;
     }
 
+    /**
+     * Get the time this light state is to remain active.
+     *
+     * @return time in ms the light state is to remain 'on'.
+     */
     public int      getDuration()
     {
         return onTime;
     }
 
+    /**
+     * Advance to the next state in the light sequence.
+     *
+     * @return the next light state in the sequence.
+     */
     public abstract TrafficLight next();
-
-    private int onTime;
 }

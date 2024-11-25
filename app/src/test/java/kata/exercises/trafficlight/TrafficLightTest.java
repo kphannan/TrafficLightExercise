@@ -10,42 +10,42 @@ import org.junit.jupiter.api.Test;
 /**
  * Unit tests.
  */
-public class TrafficLightTest
+class TrafficLightTest
 {
     @Test
-    public void verifyYellowFollowsGreen()
+    void verifyYellowFollowsGreen()
     {
         assertEquals( TrafficLight.YELLOW, TrafficLight.GREEN.next() );
     }
 
     @Test
-    public void verifyGreenFollowsRed()
+    void verifyGreenFollowsRed()
     {
         assertEquals( TrafficLight.GREEN, TrafficLight.RED.next() );
     }
 
     @Test
-    public void verifyRedFollowsYellow()
+    void verifyRedFollowsYellow()
     {
         assertEquals( TrafficLight.RED, TrafficLight.YELLOW.next() );
     }
 
 
     @Test
-    public void verifyRedDuration()
+    void verifyRedDuration()
     {
         assertEquals( 8, TrafficLight.RED.getDuration() );
     }
 
 
     @Test
-    public void verifyGreenDuration()
+    void verifyGreenDuration()
     {
         assertEquals( 6, TrafficLight.GREEN.getDuration() );
     }
 
     @Test
-    public void verifyYellowDuration()
+    void verifyYellowDuration()
     {
         assertEquals( 2, TrafficLight.YELLOW.getDuration() );
     }
