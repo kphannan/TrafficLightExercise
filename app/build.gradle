@@ -1,0 +1,14 @@
+
+
+
+plugins {
+    id 'convention-java'
+    id 'convention-application'
+}
+
+
+// version = 'z.y.x'
+version = versioning.info.display
+// version = versioning.versionNumber
+
+

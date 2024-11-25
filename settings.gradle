@@ -23,3 +23,13 @@ dependencyResolutionManagement {
 }
 
 rootProject.name = 'TrafficLight'
+
+// includeBuild 'build-conventions'
+// includeBuild 'buildSrc'
+include 'app'
+// project( ":app" ).name = "TrafficLight-App"
+project( ":app" ).name = rootProject.name +  "-app"
+// project( ":app" ).name = "TrafficLight-app"
+// project( ":app" ).projectDir = file( "TrafficLight-App")
+// include 'lib'
+// project( ":lib" ).name = rootProject.name +  "-lib"
