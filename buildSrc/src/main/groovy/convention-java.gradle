@@ -178,14 +178,9 @@ def getVersion() {
 // Configure how a version number is computed
 versioning {
     releases = ['release', 'master']
-    // releaseMode = 'bogus'
-    // releaseMode = 'snapshot'
-    // releaseMode = { nextTag, lastTag, currentTag, extension ->
-    //    "${nextTag}"
-    // }
-    // releaseMode = 'tag'	// (tag or snapshot) how to compute version on release-branches
-    // displayMode = 'snapshot'	// (full, snapshot or base) how to compute version on non-release-branches
-    displayMode = 'base'	// (full, snapshot or base) how to compute version on non-release-branches
+    // releaseMode = 'tag'	// [tag(default) or snapshot how to compute version on release-branches
+
+    displayMode = 'snapshot'	// [full(default), snapshot or base] how to compute version on non-release-branches
 }
 
 
