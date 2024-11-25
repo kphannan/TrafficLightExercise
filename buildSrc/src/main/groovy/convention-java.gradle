@@ -6,3 +6,8 @@ plugins {
 }
 
 
+dependencies {
+
+    testImplementation libs.junit.jupiter
+}
+
