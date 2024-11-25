@@ -12,3 +12,15 @@ application {
     mainClass = "${basePackage}.app.Main"
 }
 
+
+// --- Artifact Publishing
+publishing {
+    publications {
+        maven( MavenPublication ) {
+            groupId = 'com.example'
+            artifactId = 'default-application'
+            version = '0.0'
+        }
+    }
+}
+

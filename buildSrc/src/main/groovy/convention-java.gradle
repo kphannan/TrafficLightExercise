@@ -175,11 +175,25 @@ def getVersion() {
     return versioning.info.full
 }
 
+// Configure how a version number is computed
 versioning {
     releases = ['release', 'master']
-    releaseMode = 'tag'	// (tag or snapshot) how to compute version on release-branches
-    displayMode = 'snapshot'	// (full, snapshot or base) how to compute version on non-release-branches
+    // releaseMode = 'bogus'
+    // releaseMode = 'snapshot'
+    // releaseMode = { nextTag, lastTag, currentTag, extension ->
+    //    "${nextTag}"
+    // }
+    // releaseMode = 'tag'	// (tag or snapshot) how to compute version on release-branches
+    // displayMode = 'snapshot'	// (full, snapshot or base) how to compute version on non-release-branches
+    displayMode = 'base'	// (full, snapshot or base) how to compute version on non-release-branches
 }
+
+
+// println versioning
+// println versioning.info
+// println "Version Number:"
+// println versioning.info.versionNumber.major + "." + versioning.info.versionNumber.minor
+// version = versioning.info.display
 
 
 jar {
