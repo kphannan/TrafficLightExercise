@@ -4,13 +4,12 @@
 <!-- https://github.com/darrendanvers/pmd-gradle-example/blob/master/config/pmd/pmd.xml -->
 
 
-<!-- @SuppressWarnings({"PMD.JUnitAssertionsShouldIncludeMessage", "PMD.JUnitTestContainsTooManyAsserts", "PMD. AtLeastOneConstructor" }) -->
+<!-- @SuppressWarnings({"PMD.UnitTestAssertionsShouldIncludeMessage", "PMD.UnitTestContainsTooManyAsserts", "PMD. AtLeastOneConstructor" }) -->
 
 
 <ruleset name="Custom ruleset"
-         xmlns="http://pmd.sourceforge.net/ruleset/2.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://pmd.sourceforge.net/ruleset/2.0.0
+    xmlns="http://pmd.sourceforge.net/ruleset/2.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pmd.sourceforge.net/ruleset/2.0.0
          http://pmd.sourceforge.net/ruleset_2_0_0.xsd">
     <description>
         PMD Basic Configuration
@@ -20,9 +19,9 @@
     <!-- Best Practices -->
     <rule ref="category/java/bestpractices.xml">
         <!-- Tests for exceptions may check message text and cause. -->
-        <exclude name="JUnitAssertionsShouldIncludeMessage" />
+        <exclude name="UnitTestAssertionsShouldIncludeMessage" />
     </rule>
-    <rule ref="category/java/bestpractices.xml/JUnitTestContainsTooManyAsserts">
+    <rule ref="category/java/bestpractices.xml/UnitTestContainsTooManyAsserts">
         <properties>
             <property name="maximumAsserts" value="5" />
         </properties>
@@ -46,7 +45,7 @@
         </properties>
     </rule>
 
-    <rule ref="category/java/codestyle.xml/MethodNamingConventions" >
+    <rule ref="category/java/codestyle.xml/MethodNamingConventions">
         <properties>
             <!-- I like have underscores in my test names. This allows for that. -->
             <property name="junit4TestPattern" value="[a-z][a-zA-Z0-9_]*" />

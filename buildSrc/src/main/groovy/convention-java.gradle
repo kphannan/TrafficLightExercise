@@ -139,8 +139,8 @@ jacocoTestReport {
     afterEvaluate {
         classDirectories.setFrom(files(classDirectories.files.collect {
             fileTree(dir: it, exclude: [
-                      "**/Application.class"  // Do not include the application class in coverage stats
-                    , "**/App.class"          // Do not include the application class in coverage stats
+                      "**/*Application.class"  // Do not include the application class in coverage stats
+                    , "**/*App.class"          // Do not include the application class in coverage stats
             ])
         }))
     }
